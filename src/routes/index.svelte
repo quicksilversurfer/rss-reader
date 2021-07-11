@@ -23,14 +23,14 @@
 	<title>Sapper RSS Reader</title>
 </svelte:head>
 
-<div class="feed-list">
-	<!-- <button on:click={refreshFeeds}>Reload</button> -->
+<!-- <div class="feed-list">
+	<button on:click={refreshFeeds}>Reload</button>
 	<ul>
 		{#each rssList as feed}
 			<li>{feed}</li>
 		{/each}
 	</ul>
-</div>
+</div> -->
 
 <div class="container">
 	<div class="feed-container">
@@ -39,8 +39,10 @@
 				<h2>{feed.title}</h2>
 				{#each feed.items as item}
 					<li>
-						<a href={item.link}>{item.title}</a>
-						<!-- <img src={item.enclosure.url} alt={item.title}> -->
+						<a href={item.link} target="_blank">{item.title}</a>
+						{#if item.enclosure }
+						<img src={item.enclosure.url} alt={item.title}>
+						{/if}
 						<!-- <p>{@html item.content}</p> -->
 						<!-- <caption>{item.isoDate}</caption> -->
 					</li>
@@ -79,17 +81,15 @@
 
 	/* Styles */
 	.container,
-	.feed-list,
 	.feed {
 		display: flex;
 	}
-	.feed-list,
 	.feed {
+		margin-top: 0;
+		margin-bottom: 2em;
 		padding: 10px;
 	}
-	.feed-list {
-		flex-direction: column;
-	}
+
 	.feed-container {
 		width: 100%;
 		display: grid;
@@ -107,6 +107,8 @@
 	.feed li {
 		padding: 12px 0;
 		border-bottom: 1px solid rgba(20, 20, 20, 0.08);
+		display: flex;
+		flex-direction: row;
 	}
 	.feed li:before {
 		border: 1px solid #ccc;
@@ -115,6 +117,10 @@
 		text-decoration: none ;
 		font-family: inconsolata, monospace;
 		font-size: 14px;
+		flex: 1;
+	}
+	.feed li img {
+		max-height: 40px;
 	}
 
 	@media (min-width: 480px) {
