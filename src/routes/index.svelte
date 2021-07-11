@@ -8,13 +8,13 @@
 
 	//On load, maintain RSS list
 	onMount(async () => {
-		const content = await fetch("api/refresh").then((r) => r.json());
+		const content = await fetch("api/").then((r) => r.json());
 		feedsContent = content;
 	});
 
 	//Refresh RSS feed
 	const refreshFeeds = async () => {
-		const content = await fetch("api/refresh").then((r) => r.json());
+		const content = await fetch("api/").then((r) => r.json());
 		feedsContent = content;
 	};
 </script>
@@ -24,7 +24,7 @@
 </svelte:head>
 
 <div class="feed-list">
-	<button on:click={refreshFeeds}>Reload</button>
+	<!-- <button on:click={refreshFeeds}>Reload</button> -->
 	<ul>
 		{#each rssList as feed}
 			<li>{feed}</li>
@@ -100,6 +100,10 @@
 		flex-direction: column;
 		list-style: none;
 	}
+	.feed h2 {
+		font-size: 14px;
+		text-transform: uppercase;
+	}
 	.feed li {
 		padding: 12px 0;
 		border-bottom: 1px solid rgba(20, 20, 20, 0.08);
@@ -107,16 +111,15 @@
 	.feed li:before {
 		border: 1px solid #ccc;
 	}
-	.add-feed {
-		display: flex;
-	}
-	.feed-input {
-		flex: 1;
+	.feed li a{
+		text-decoration: none ;
+		font-family: inconsolata, monospace;
+		font-size: 14px;
 	}
 
 	@media (min-width: 480px) {
-		h1 {
+		/* h1 {
 			font-size: 4em;
-		}
+		} */
 	}
 </style>
