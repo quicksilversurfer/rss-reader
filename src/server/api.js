@@ -4,13 +4,16 @@ import Parser from 'rss-parser'
 //collection of current subscribed RSS feeds
 let rssList = new Set();
 rssList.add('https://news.ycombinator.com/rss');
-rssList.add('https://dribbble.hittter.com/feeds/dribbble/popular.rss');
+rssList.add('https://blog.experientia.com/feed/');
+rssList.add('https://medium.com/feed/datasociety-points/tagged/health');
 rssList.add('https://fuckiwishiknewth.at/feed/');
+rssList.add('https://uxdesign.cc/feed');
+rssList.add('https://www.technologyreview.com/feed/');
+rssList.add('http://feeds2.feedburner.com/Swissmiss');
+rssList.add('https://www.pentagram.com/feed');
 rssList.add('https://www.creativeboom.com/feed/');
 rssList.add('https://www.creativereview.co.uk/feed/');
-rssList.add('http://feeds2.feedburner.com/Swissmiss');
-rssList.add('https://blog.experientia.com/feed/');
-rssList.add('https://www.pentagram.com/feed');
+
 
 
 //create new RSS parser
