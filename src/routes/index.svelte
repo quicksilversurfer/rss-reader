@@ -6,10 +6,13 @@
 	let rssList = [];
 	let feedsContent = [];
 
+	let ready = false;
+
 	//On load, maintain RSS list
 	onMount(async () => {
 		const content = await fetch("api/").then((r) => r.json());
 		feedsContent = content;
+		ready = true;
 	});
 
 	//Refresh RSS feed
@@ -28,32 +31,42 @@
 	<title>Sapper RSS Reader</title>
 </svelte:head>
 
-<div class="container">
-	<div class="feed-container">
-		{#each feedsContent as feed}
-			<div class="feed">
-				<h2>{feed.title}</h2>
-				<ul>
-					{#each feed.items as item}
-						<li>
-							<a href={item.link} target="_blank">{item.title}<span class="arrow"/></a>
+<!-- Loading -->
+{#if !ready}
+	<div id="spinner" />
+{/if}
 
-							{#if item.enclosure}
-								<img
-									src={item.enclosure.url}
-									alt={item.title}
-									on:error={handleImgError}
-								/>
-							{/if}
-							<!-- <p>{@html item.content}</p> -->
-							<!-- <caption>{item.isoDate}</caption> -->
-						</li>
-					{/each}
-				</ul>
-			</div>
-		{/each}
+<!-- Content -->
+{#if ready}
+	<div class="container">
+		<div class="feed-container">
+			{#each feedsContent as feed}
+				<div class="feed">
+					<h2>{feed.title}</h2>
+					<ul>
+						{#each feed.items as item}
+							<li>
+								<a href={item.link} target="_blank"
+									>{item.title}<span class="arrow" /></a
+								>
+
+								{#if item.enclosure}
+									<img
+										src={item.enclosure.url}
+										alt={item.title}
+										on:error={handleImgError}
+									/>
+								{/if}
+								<!-- <p>{@html item.content}</p> -->
+								<!-- <caption>{item.isoDate}</caption> -->
+							</li>
+						{/each}
+					</ul>
+				</div>
+			{/each}
+		</div>
 	</div>
-</div>
+{/if}
 
 <style>
 	/* Styles */
@@ -64,7 +77,6 @@
 	.feed {
 		margin-top: 0;
 		margin-bottom: 2em;
-		padding: 10px;
 	}
 
 	.feed-container {
@@ -75,18 +87,18 @@
 		flex-direction: column;
 	}
 	.feed h2 {
-		font-size: 14px;
+		font-size: 1em;
 		text-transform: uppercase;
 	}
 	.feed ul {
 		list-style: none;
 		column-count: 2;
 		padding: 0;
-		column-gap: 32px;
+		column-gap: 2em;
 		/* height: 60vh; */
 	}
 	.feed li {
-		padding: 12px 0;
+		padding: 0.75em 0;
 		border-bottom: 1px solid rgba(20, 20, 20, 0.04);
 		display: flex;
 		flex-direction: row;
@@ -97,10 +109,11 @@
 	.feed li a {
 		text-decoration: none;
 		font-family: inconsolata, monospace;
-		font-size: 14px;
+		font-size: 0.875em;
 		flex: 1;
 		color: #2b2b2b;
-		transform: color .3s ease;
+		padding-right: 1em;
+		transform: color 0.3s ease;
 	}
 	.feed li a:visited {
 		color: #b2b2b2;
@@ -121,7 +134,6 @@
 		width: 100px;
 		opacity: 0;
 		transition: all 0.4s ease;
-
 	}
 
 	.arrow:before {
@@ -137,11 +149,11 @@
 	}
 
 	.feed li a:hover .arrow {
-		opacity: .5;
+		opacity: 0.2;
 	}
 
 	.feed li a:hover .arrow:before {
-		right: -28px;
+		right: -29px;
 		width: 20px;
 	}
 
@@ -160,8 +172,34 @@
 	}
 
 	.feed li a:hover .arrow:after {
-		right: -28px;
+		right: -30px;
 		/* right: -30px; */
+	}
+
+	/* Spinnner */
+	@keyframes spinner {
+		to {
+			transform: rotate(360deg);
+		}
+	}
+	#spinner {
+		height: 100vh;
+	}
+
+	#spinner:before {
+		content: "";
+		box-sizing: border-box;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		width: 20px;
+		height: 20px;
+		margin-top: -10px;
+		margin-left: -10px;
+		border-radius: 50%;
+		border: 2px solid #ccc;
+		border-top-color: #000;
+		animation: spinner 0.6s linear infinite;
 	}
 
 	@media (min-width: 480px) {
