@@ -28,7 +28,7 @@
 </script>
 
 <svelte:head>
-	<title>Sapper RSS Reader</title>
+	<title>RSS Reader</title>
 </svelte:head>
 
 <!-- Loading -->
@@ -202,6 +202,9 @@
 		animation: spinner 0.6s linear infinite;
 	}
 
-	@media (min-width: 480px) {
-	}
+	@media (max-width: 1199.98px) { 
+		.feed ul {
+			column-count: 1;
+		}
+	 }
 </style>
