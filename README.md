@@ -2,7 +2,11 @@
 
 A simple rss-reader that displays the feed of some popular design and technology blogs on one page. 
 
-As a fan of the [Google Reader](), I've always felt that RSS is a powerful way of consuming information on the internet through a conscious, and thoughtful interface.  
+As a fan of the [Google Reader](), I've always felt that RSS has been a powerful way of consuming information on the internet through a conscious, and thoughtful interface.  
+
+## blogs
+
+
 
 
 # sapper-template

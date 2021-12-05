@@ -2,10 +2,7 @@
 	import { onMount } from "svelte";
 	import error from "images/tenor.gif";
 
-	let rssUrl = "https://news.ycombinator.com/rss";
-	let rssList = [];
 	let feedsContent = [];
-
 	let ready = false;
 
 	//On load, maintain RSS list
