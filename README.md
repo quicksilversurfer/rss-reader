@@ -1,3 +1,10 @@
+# rss-reader
+
+A simple rss-reader that displays the feed of some popular design and technology blogs on one page. 
+
+As a fan of the [Google Reader](), I've always felt that RSS is a powerful way of consuming information on the internet through a conscious, and thoughtful interface.  
+
+
 # sapper-template
 
 The default template for setting up a [Sapper](https://github.com/sveltejs/sapper) project. Can use either Rollup or webpack as bundler.
